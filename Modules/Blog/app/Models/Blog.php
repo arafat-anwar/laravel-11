@@ -3,20 +3,21 @@
 namespace Modules\Blog\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Blog\Database\Factories\BlogFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
+    protected $fillable = [
+        'code',
+        'title',
+        'thumbnail',
+        'blog',
+        'user_id',
+        'deleted_at',
+    ];
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-
-    // protected static function newFactory(): BlogFactory
-    // {
-    //     // return BlogFactory::new();
-    // }
+    public function user(){
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }
